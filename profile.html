@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="icon" href="assets/image/favicon.png" type="image/png">
+    
+    <title>My Profile | RasaGo</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <script src="js/profile.js" defer></script>
+
+
+</head>
+<body class="profile-page">
+
+<header class="profile-header">
+    <a href="index.html" class="profile-logo">
+        <img src="assets/images/Logo.png" alt="RasaGo">
+    </a>
+    <a href="index.html" class="back-home">← Back to Home</a>
+</header>
+
+<main class="profile-container">
+    <div class="profile-welcome">
+        <span class="profile-eyebrow">MY ACCOUNT</span>
+        <h1>My Profile</h1>
+        <p>Manage your account and keep track of your delicious orders.</p>
+    </div>
+
+    <section class="profile-card">
+        <div class="profile-card-top">
+            <img src="assets/images/profile_icon.png"
+                 alt="Profile photo" id="profileImage">
+
+            <div>
+                <h2 id="profileName">RasaGo User</h2>
+                <p id="profileEmail">user@example.com</p>
+                <span class="member-badge">RasaGo Member</span>
+            </div>
+        </div>
+
+        <div class="profile-details">
+            <div>
+                <span>Full Name</span>
+                <strong id="detailName">-</strong>
+            </div>
+            <div>
+                <span>Email Address</span>
+                <strong id="detailEmail">-</strong>
+            </div>
+            <div>
+                <span>Phone Number</span>
+                <strong id="detailPhone">Not provided</strong>
+            </div>
+        </div>
+
+        <button class="edit-profile-btn" id="editProfileBtn" type="button">
+            Edit Profile
+        </button>
+
+        <form id="editProfileForm" hidden>
+            <label for="editName">Full Name</label>
+            <input id="editName" type="text" required>
+
+            <label for="editEmail">Email Address</label>
+            <input id="editEmail" type="email" required>
+
+            <label for="editPhone">Phone Number</label>
+            <input id="editPhone" type="tel" placeholder="07XXXXXXXX">
+
+            <button class="edit-profile-btn" type="submit">Save Changes</button>
+            <p id="profileMessage" aria-live="polite"></p>
+        </form>
+    </section>
+
+    <section class="order-section" id="orderHistory">
+        <div class="order-heading">
+            <div>
+                <span class="profile-eyebrow">YOUR FOOD JOURNEY</span>
+                <h2>Order History</h2>
+                <p>Check the details of your previous orders.</p>
+            </div>
+            <span class="order-count" id="orderCount">0 Orders</span>
+        </div>
+
+        <div class="order-list" id="orderList"></div>
+
+        <div class="empty-orders" id="emptyOrders" hidden>
+            <div class="empty-order-icon">🍛</div>
+            <h3>No orders yet!</h3>
+            <p>Your delicious food orders will appear here.</p>
+            <a href="index.html#menu" class="edit-profile-btn">
+                Explore Menu
+            </a>
+        </div>
+    </section>
+</main>
+
+<footer class="profile-footer">
+    <p>© 2026 RasaGo. Good Food. Good Mood.</p>
+</footer>
+
+</body>
+</html>

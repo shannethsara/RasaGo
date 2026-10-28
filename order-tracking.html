@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f47721">
+
+    <title>Track Your Order | RasaGo</title>
+
+    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="css/order-tracking.css">
+    <script src="js/order-tracking.js" defer></script>
+</head>
+<body>
+
+<header class="tracking-header">
+    <a href="index.html" class="brand">
+        <img src="assets/images/logo.png" alt="RasaGo Logo">
+        <span>Rasa<span class="brand-accent">Go</span></span>
+    </a>
+
+    <nav class="header-nav">
+        <a href="menu.html">Menu</a>
+        <a href="profile.html">My Profile</a>
+    </nav>
+</header>
+
+<main class="tracking-container">
+
+    <section class="page-intro">
+        <span class="eyebrow">YOUR FOOD JOURNEY</span>
+        <h1>Track Your <span>Order</span></h1>
+        <p>Stay updated on your delicious food delivery.</p>
+    </section>
+
+    <!-- Order lookup -->
+    <section class="tracking-search card">
+        <form id="trackingSearchForm">
+            <label for="orderIdInput">Enter Your Order Reference</label>
+
+            <div class="search-row">
+                <input
+                    type="text"
+                    id="orderIdInput"
+                    placeholder="e.g. RG12345678"
+                    autocomplete="off"
+                    maxlength="30"
+                    required
+                >
+
+                <button type="submit" class="primary-btn">
+                    Track Order
+                </button>
+            </div>
+
+            <p class="helper-text">
+                Demo mode: you can track the latest order saved in this browser.
+            </p>
+
+            <p id="searchMessage" class="message" aria-live="polite"></p>
+        </form>
+    </section>
+
+    <!-- No order state -->
+    <section id="noOrderState" class="empty-state card" hidden>
+        <div class="empty-icon">🛍️</div>
+        <h2>No Order Found</h2>
+        <p>
+            Place a demo order first, then return here to view its tracking
+            information.
+        </p>
+        <a href="menu.html" class="primary-btn link-btn">Explore Menu</a>
+    </section>
+
+    <!-- Tracking details -->
+    <div id="trackingDetails" hidden>
+
+        <section class="order-overview card">
+            <div class="overview-main">
+                <span class="eyebrow">ORDER REFERENCE</span>
+                <h2 id="orderReference">RG00000000</h2>
+                <p id="orderDate">Order date</p>
+            </div>
+
+            <div class="status-badge" id="statusBadge">
+                Order Placed
+            </div>
+        </section>
+
+        <section class="delivery-estimate card">
+            <div class="estimate-icon">🚚</div>
+
+            <div class="estimate-content">
+                <span class="eyebrow">DELIVERY UPDATE</span>
+                <h2 id="statusHeading">Your order has been placed!</h2>
+                <p id="statusDescription">
+                    We are getting your order details ready.
+                </p>
+                <p id="estimatedTime" class="estimated-time"></p>
+            </div>
+        </section>
+
+        <!-- Progress tracker -->
+        <section class="card progress-card">
+            <h2>Order Progress</h2>
+            <p class="section-description">
+                Follow your food from the kitchen to your doorstep.
+            </p>
+
+            <div class="progress-track" id="progressTrack">
+
+                <div class="progress-step" data-step="0">
+                    <div class="step-icon">✓</div>
+                    <div class="step-info">
+                        <h3>Order Placed</h3>
+                        <p>We received your order.</p>
+                    </div>
+                </div>
+
+                <div class="progress-step" data-step="1">
+                    <div class="step-icon">✓</div>
+                    <div class="step-info">
+                        <h3>Order Confirmed</h3>
+                        <p>Your order has been confirmed.</p>
+                    </div>
+                </div>
+
+                <div class="progress-step" data-step="2">
+                    <div class="step-icon">🍳</div>
+                    <div class="step-info">
+                        <h3>Preparing Food</h3>
+                        <p>Your food is being prepared.</p>
+                    </div>
+                </div>
+
+                <div class="progress-step" data-step="3">
+                    <div class="step-icon">🚴</div>
+                    <div class="step-info">
+                        <h3>Out for Delivery</h3>
+                        <p>Your order is on its way.</p>
+                    </div>
+                </div>
+
+                <div class="progress-step" data-step="4">
+                    <div class="step-icon">🎉</div>
+                    <div class="step-info">
+                        <h3>Delivered</h3>
+                        <p>Enjoy your meal!</p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="details-grid">
+
+            <!-- Items -->
+            <section class="card">
+                <h2>Order Items</h2>
+                <div id="trackedItems" class="tracked-items"></div>
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <strong id="trackedSubtotal">Rs. 0.00</strong>
+                </div>
+
+                <div class="summary-row">
+                    <span>Delivery Fee</span>
+                    <strong id="trackedDeliveryFee">Rs. 0.00</strong>
+                </div>
+
+                <div class="summary-row grand-total">
+                    <span>Total</span>
+                    <strong id="trackedTotal">Rs. 0.00</strong>
+                </div>
+            </section>
+
+            <!-- Delivery information -->
+            <section class="card">
+                <h2>Delivery Information</h2>
+
+                <div class="info-row">
+                    <span class="info-icon">👤</span>
+                    <div>
+                        <small>Customer</small>
+                        <p id="trackedCustomer">-</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-icon">📞</span>
+                    <div>
+                        <small>Phone</small>
+                        <p id="trackedPhone">-</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-icon">📍</span>
+                    <div>
+                        <small>Delivery Address</small>
+                        <p id="trackedAddress">-</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-icon">💳</span>
+                    <div>
+                        <small>Payment Method</small>
+                        <p id="trackedPayment">-</p>
+                    </div>
+                </div>
+
+                <div class="info-row">
+                    <span class="info-icon">📝</span>
+                    <div>
+                        <small>Delivery Instructions</small>
+                        <p id="trackedInstructions">No instructions</p>
+                    </div>
+                </div>
+            </section>
+
+        </div>
+
+        <!-- Demo status controls -->
+        <section class="card demo-controls">
+            <div>
+                <span class="eyebrow">FRONTEND DEMO</span>
+                <h2>Preview Order Status</h2>
+                <p>
+                    These controls are for testing the UI only.
+                    They do not update a real restaurant order.
+                </p>
+            </div>
+
+            <label for="demoStatusSelect">Select Status</label>
+
+            <select id="demoStatusSelect">
+                <option value="0">Order Placed</option>
+                <option value="1">Order Confirmed</option>
+                <option value="2">Preparing Food</option>
+                <option value="3">Out for Delivery</option>
+                <option value="4">Delivered</option>
+                <option value="5">Cancelled</option>
+            </select>
+
+            <button type="button" id="updateDemoStatus" class="secondary-btn">
+                Update Demo Status
+            </button>
+
+            <p id="demoStatusMessage" class="helper-text" aria-live="polite"></p>
+        </section>
+
+    </div>
+
+</main>
+
+<footer class="tracking-footer">
+    <p>© 2026 RasaGo. Made with ❤️ for food lovers.</p>
+</footer>
+
+</body>
+</html>

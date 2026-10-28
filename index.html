@@ -1,0 +1,555 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>RasaGo | Delicious Food Delivered</title>
+    <meta name="description" content="Order your favourite Sri Lankan food with RasaGo.">
+
+    <link rel="icon" href="assets/images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<header class="navbar">
+    <div class="container navbar-content">
+
+        <a href="index.html" class="brand">
+            <img src="assets/images/Logo.png" alt="RasaGo Logo">
+        </a>
+
+        <button class="menu-toggle" id="menuToggle"
+                aria-label="Toggle navigation" aria-expanded="false">☰</button>
+
+        <nav class="nav-links" id="navLinks">
+            <a href="index.html" class="active">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="#popular">Menu</a>
+        </nav>
+
+        <div class="account-nav" id="accountNav">
+            <a href="#" class="create-account-btn" id="createAccountBtn">
+                <span>♟</span> Create Account
+            </a>
+
+            <div class="profile-menu-wrap" id="profileMenuWrap" hidden>
+                <button class="profile-icon-btn" id="profileMenuBtn"
+                        type="button" aria-label="Open profile menu"
+                        aria-expanded="false">
+                    <img src="assets/images/profile_icon.png"
+                         alt="Profile" id="navProfileImage">
+                </button>
+
+                <div class="profile-dropdown" id="profileDropdown" hidden>
+                    <div class="dropdown-user">
+                        <strong id="navUserName">RasaGo User</strong>
+                        <small id="navUserEmail">user@example.com</small>
+                    </div>
+                    <a href="profile.html">My Profile</a>
+                    <a href="profile.html#orderHistory">My Orders</a>
+                    <button type="button" id="logoutBtn">Logout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- LOGIN POPUP -->
+<div class="auth-overlay" id="loginModal">
+    <div class="auth-modal">
+        <button class="auth-close" data-close="loginModal">&times;</button>
+
+        <div class="auth-brand">
+            <img src="assets/images/logo.png" alt="RasaGo">
+            <p>Welcome back to RasaGo!</p>
+        </div>
+
+        <h2>Welcome Back!</h2>
+        <p class="auth-subtitle">Login to order your favourite food.</p>
+
+        <button class="social-btn" id="googleLogin">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                 alt="Google">
+            Continue with Google
+        </button>
+
+        <button class="social-btn phone-btn" id="showLoginPhone">
+            <span>📱</span> Continue with Phone Number
+        </button>
+
+        <div id="loginPhoneFields" hidden>
+            <label for="loginPhone">Phone Number</label>
+            <input id="loginPhone" type="tel" placeholder="+94 77 123 4567">
+            <button class="auth-submit demo-action" type="button">Send Verification Code</button>
+
+            <label for="loginOtp">Verification Code</label>
+            <input id="loginOtp" type="text" placeholder="Enter OTP">
+        </div>
+
+        <div class="auth-divider"><span>OR LOGIN WITH EMAIL</span></div>
+
+        <form id="loginForm">
+            <label for="loginEmail">Email Address</label>
+            <input id="loginEmail" type="email" placeholder="Enter your email" required>
+
+            <label for="loginPassword">Password</label>
+            <input id="loginPassword" type="password" placeholder="Enter your password" required>
+
+            <button class="auth-submit" type="submit">Login</button>
+        </form>
+
+        <p class="auth-bottom">
+            Don't have an account?
+            <button id="openRegister" type="button">Create Account</button>
+        </p>
+    </div>
+</div>
+
+<!-- CREATE ACCOUNT POPUP -->
+<div class="auth-overlay" id="registerModal">
+    <div class="auth-modal">
+        <button class="auth-close" data-close="registerModal">&times;</button>
+
+        <div class="auth-brand">
+            <img src="assets/images/logo.png" alt="RasaGo">
+            <p>Fresh food, delivered with love.</p>
+        </div>
+
+        <h2>Create Account</h2>
+        <p class="auth-subtitle">Join RasaGo and discover delicious food.</p>
+
+        <button class="social-btn" id="googleRegister">
+            <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+                 alt="Google">
+            Sign up with Google
+        </button>
+
+        <button class="social-btn phone-btn" id="showRegisterPhone">
+            <span>📱</span> Sign up with Phone Number
+        </button>
+
+        <div id="registerPhoneFields" hidden>
+            <label for="registerPhone">Phone Number</label>
+            <input id="registerPhone" type="tel" placeholder="+94 77 123 4567">
+            <button class="auth-submit demo-action" type="button">Send Verification Code</button>
+
+            <label for="registerOtp">Verification Code</label>
+            <input id="registerOtp" type="text" placeholder="Enter OTP">
+        </div>
+
+        <div class="auth-divider"><span>OR SIGN UP WITH EMAIL</span></div>
+
+        <form id="registerForm">
+            <label for="fullName">Full Name</label>
+            <input id="fullName" type="text" placeholder="Enter your full name" required>
+
+            <label for="registerEmail">Email Address</label>
+            <input id="registerEmail" type="email" placeholder="Enter your email" required>
+
+            <label for="registerPassword">Password</label>
+            <input id="registerPassword" type="password"
+                   placeholder="Minimum 8 characters" minlength="8" required>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input id="confirmPassword" type="password"
+                   placeholder="Re-enter your password" minlength="8" required>
+
+            <button class="auth-submit" type="submit">Create Account</button>
+        </form>
+
+        <p class="auth-bottom">
+            By continuing, you agree to our
+            <button type="button" id="showLegal">Privacy Policy &amp; Terms</button>
+        </p>
+
+        <p class="auth-bottom">
+            Already have an account?
+            <button id="backToLogin" type="button">Login</button>
+        </p>
+    </div>
+</div>
+
+<!-- PRIVACY AND TERMS POPUP -->
+<div class="auth-overlay" id="legalModal">
+    <div class="auth-modal legal-modal">
+        <button class="auth-close" data-close="legalModal">&times;</button>
+
+        <div class="auth-brand">
+            <img src="assets/images/logo.png" alt="RasaGo">
+        </div>
+
+        <h2>Privacy &amp; Terms</h2>
+        <p class="auth-subtitle">Please read before creating your account.</p>
+
+        <div class="legal-content">
+            <h3>🔒 Privacy Policy</h3>
+            <p>RasaGo may use your name, email address and phone number to provide account and food delivery services. Your information should be handled securely.</p>
+
+            <h3>📋 Terms &amp; Conditions</h3>
+            <p>Please provide accurate information and keep your account details secure. Order availability, delivery times and charges may vary.</p>
+
+            <h3>🍛 Using RasaGo</h3>
+            <p>By using RasaGo, you agree to follow the applicable service terms.</p>
+        </div>
+
+        <label class="consent-row">
+            <input type="checkbox" id="legalConsent">
+            <span>I have read and agree to the Privacy Policy and Terms &amp; Conditions.</span>
+        </label>
+
+        <p class="auth-error" id="legalError"></p>
+        <button class="auth-submit" id="agreeLegal" type="button">Agree &amp; Continue</button>
+    </div>
+</div>
+
+<!-- ACCOUNT SUCCESS POPUP -->
+<div class="auth-overlay" id="successModal">
+    <div class="auth-modal success-modal">
+        <button class="auth-close" data-close="successModal">&times;</button>
+        <div class="success-icon">✓</div>
+        <h2>Account Created Successfully!</h2>
+        <p>Your RasaGo account setup is complete in this demo.</p>
+        <button class="auth-submit" id="successContinue" type="button">
+            Continue to RasaGo
+        </button>
+    </div>
+</div>
+
+<main>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container hero-grid">
+
+            <div class="hero-content">
+                <span class="hero-label">
+                    <span class="status-dot"></span>
+                    YOUR LOCAL FOOD DELIVERY
+                </span>
+
+                <h1>
+                    Good Food.<br>
+                    Good Mood.<br>
+                    <span>RasaGo!</span>
+                </h1>
+
+                <p>
+                    Discover your favourite Sri Lankan flavours, customise
+                    your meals and enjoy delicious food delivered to your doorstep.
+                </p>
+
+                <div class="hero-buttons">
+                    <a href="menu.html" class="btn btn-primary">
+                        Explore Menu <span>→</span>
+                    </a>
+                    <a href="#how-it-works" class="btn btn-secondary">
+                        How It Works
+                    </a>
+                </div>
+
+                <div class="hero-benefits">
+                    <span>✓ Easy Ordering</span>
+                    <span>✓ Fresh Food</span>
+                    <span>✓ Local Delivery</span>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-circle"></div>
+
+                <img class="hero-food-image"
+                     src="assets/images/01.png"
+                     alt="Delicious Sri Lankan food">
+
+                <div class="floating-card">
+                    <span class="floating-icon">♨</span>
+                    <div>
+                        <strong>Freshly Prepared</strong>
+                        <small>Delivered with care</small>
+                    </div>
+                </div>
+
+                <div class="floating-badge">MADE WITH ♥</div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOD CATEGORIES -->
+    <section class="categories-section" id="categories">
+        <div class="container">
+
+            <div class="section-heading">
+                <span class="section-label">CHOOSE YOUR FAVOURITE</span>
+                <h2>Explore Our Food Categories</h2>
+                <p>Discover your favourite Sri Lankan meals, freshly prepared for you.</p>
+            </div>
+
+            <div class="category-grid">
+
+                <a href="menu.html" class="category-card category-rice">
+                    <span class="category-emoji">🍛</span>
+                    <h3>Rice &amp; Curry</h3>
+                    <p>Build your own plate</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-string-hoppers">
+                    <span class="category-emoji">🍜</span>
+                    <h3>String Hoppers</h3>
+                    <p>Soft &amp; traditional</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-hoppers">
+                    <span class="category-emoji">🥚</span>
+                    <h3>Hoppers</h3>
+                    <p>Crispy &amp; delicious</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-rotti">
+                    <span class="category-emoji">🫓</span>
+                    <h3>Rotti</h3>
+                    <p>Freshly prepared</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-kottu">
+                    <span class="category-emoji">🥘</span>
+                    <h3>Kottu</h3>
+                    <p>Hot &amp; flavourful</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-noodles">
+                    <span class="category-emoji">🍜</span>
+                    <h3>Noodles</h3>
+                    <p>Quick &amp; tasty</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+                <a href="menu.html" class="category-card category-pasta">
+                    <span class="category-emoji">🍝</span>
+                    <h3>Pasta</h3>
+                    <p>Rich &amp; creamy</p>
+                    <span class="category-arrow">↗</span>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- POPULAR FOODS -->
+    <section class="popular-section" id="popular">
+        <div class="container">
+
+            <div class="section-heading section-heading-row">
+                <div>
+                    <span class="section-label">MADE WITH LOVE</span>
+                    <h2>Popular Sri Lankan Foods</h2>
+                    <p>Find something delicious for your next meal.</p>
+                </div>
+
+                <a href="menu.html" class="view-all">View Full Menu →</a>
+            </div>
+
+            <div class="food-grid">
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="Rice and Curry" loading="lazy">
+                        <span class="food-tag">Popular</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">RICE &amp; CURRY</span>
+                        <h3>Rice &amp; Curry</h3>
+                        <p>A delicious Sri Lankan rice and curry meal.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 350</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Rice and Curry">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="String Hoppers" loading="lazy">
+                        <span class="food-tag">Traditional</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">STRING HOPPERS</span>
+                        <h3>String Hoppers</h3>
+                        <p>Soft string hoppers with your choice of extras.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 200</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore String Hoppers">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1598214886806-c87b84b7078b?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="Plain Hopper" loading="lazy">
+                        <span class="food-tag">Favourite</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">HOPPERS</span>
+                        <h3>Plain Hopper</h3>
+                        <p>Crispy-edged traditional Sri Lankan hoppers.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 120</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Hoppers">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="Pol Rotti" loading="lazy">
+                        <span class="food-tag">Fresh</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">ROTTI</span>
+                        <h3>Pol Rotti</h3>
+                        <p>Traditional coconut rotti, freshly prepared.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 150</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Rotti">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="assets/images/04.png"
+                             alt="Chicken Kottu" loading="lazy">
+                        <span class="food-tag">Must Try</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">KOTTU</span>
+                        <h3>Chicken Kottu</h3>
+                        <p>Chopped rotti tossed with chicken and vegetables.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 950</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Chicken Kottu">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="Chicken Noodles" loading="lazy">
+                        <span class="food-tag">Tasty Pick</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">NOODLES</span>
+                        <h3>Chicken Noodles</h3>
+                        <p>Stir-fried noodles with chicken and vegetables.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 850</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Chicken Noodles">+</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="food-card">
+                    <div class="food-image">
+                        <img src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&amp;fit=crop&amp;w=700&amp;q=80"
+                             alt="Chicken Pasta" loading="lazy">
+                        <span class="food-tag">Favourite</span>
+                    </div>
+                    <div class="food-details">
+                        <span class="food-category">PASTA</span>
+                        <h3>Chicken Pasta</h3>
+                        <p>Pasta served with a delicious sauce.</p>
+                        <div class="food-bottom">
+                            <strong>From LKR 900</strong>
+                            <a href="menu.html" class="add-btn" aria-label="Explore Chicken Pasta">+</a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section" id="how-it-works">
+        <div class="container">
+
+            <div class="center-heading">
+                <span class="section-label">SIMPLE &amp; CONVENIENT</span>
+                <h2>Order In Three Easy Steps</h2>
+                <p>Getting your favourite food has never been easier.</p>
+            </div>
+
+            <div class="steps-grid">
+                <article class="step-card">
+                    <span class="step-number">01</span>
+                    <h3>Choose Your Food</h3>
+                    <p>Explore our menu and select your favourite meals.</p>
+                </article>
+
+                <article class="step-card">
+                    <span class="step-number">02</span>
+                    <h3>Place Your Order</h3>
+                    <p>Choose your delivery details and payment method.</p>
+                </article>
+
+                <article class="step-card">
+                    <span class="step-number">03</span>
+                    <h3>Enjoy Your Meal</h3>
+                    <p>We prepare your order and deliver it to your door.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALL TO ACTION -->
+    <section class="container cta-section">
+        <div class="cta-box">
+            <div>
+                <span class="section-label">YOUR NEXT MEAL IS WAITING</span>
+                <h2>Something Delicious Is Calling You!</h2>
+                <p>Choose your favourites and let us deliver happiness.</p>
+            </div>
+
+            <a href="menu.html" class="btn btn-cream">Order Your Food →</a>
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-content">
+
+        <a href="index.html" class="footer-brand">
+            <img src="assets/images/Logo.png" alt="RasaGo">
+        </a>
+
+        <p>Bringing your favourite flavours closer to home.</p>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="menu.html">Menu</a>
+        </div>
+
+        <p class="copyright">© 2026 RasaGo. All rights reserved.</p>
+    </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

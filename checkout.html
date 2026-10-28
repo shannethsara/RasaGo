@@ -1,0 +1,353 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f47721">
+
+    <title>Checkout | RasaGo</title>
+    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="css/checkout.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/checkout.js" defer></script>
+</head>
+<body>
+
+<header class="checkout-header">
+    <a href="index.html" class="brand" aria-label="RasaGo Home">
+        <img src="assets/images/logo.png" alt="RasaGo Logo">
+        <span>Rasa<span class="brand-accent">Go</span></span>
+    </a>
+
+    <a href="menu.html" class="back-link">← Back to Menu</a>
+</header>
+
+<main class="checkout-container">
+    <section class="checkout-intro">
+        <span class="eyebrow">ALMOST THERE!</span>
+        <h1>Complete Your <span>Order</span></h1>
+        <p>Confirm your delivery details and choose your payment method.</p>
+    </section>
+
+    <div class="checkout-layout">
+
+        <!-- Delivery details and payment -->
+        <section class="checkout-card">
+            <h2>Delivery Details</h2>
+            <p class="section-description">
+                Enter your details and check whether delivery is available.
+            </p>
+
+            <form id="checkoutForm">
+                <div class="form-group">
+                    <label for="customerName">Full Name</label>
+                    <input
+                        type="text"
+                        id="customerName"
+                        name="customerName"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        maxlength="100"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number</label>
+                    <input
+                        type="tel"
+                        id="customerPhone"
+                        name="customerPhone"
+                        placeholder="07XXXXXXXX"
+                        pattern="0[0-9]{9}"
+                        title="Enter a 10-digit Sri Lankan phone number"
+                        autocomplete="tel"
+                        maxlength="10"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="deliveryAddress">Delivery Address</label>
+                    <textarea
+                        id="deliveryAddress"
+                        name="deliveryAddress"
+                        rows="3"
+                        placeholder="House number, street, town"
+                        autocomplete="street-address"
+                        maxlength="500"
+                        required
+                    ></textarea>
+                </div>
+
+                <!-- Location verification -->
+                <div class="location-box">
+                    <div class="location-icon" aria-hidden="true">📍</div>
+
+                    <div class="location-content">
+                        <h3>Check Your Delivery Location</h3>
+
+                        <p>
+                            We currently accept orders only within 10 km
+                            of our delivery location.
+                        </p>
+
+                        <button
+                            type="button"
+                            id="locationBtn"
+                            class="location-btn"
+                        >
+                            Use My Current Location
+                        </button>
+
+                        <p
+                            id="locationStatus"
+                            class="location-status"
+                            aria-live="polite"
+                        >
+                            Location not checked yet.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="instructions">
+                        Delivery Instructions (Optional)
+                    </label>
+
+                    <textarea
+                        id="instructions"
+                        name="instructions"
+                        rows="2"
+                        placeholder="Landmark or additional directions"
+                        maxlength="500"
+                    ></textarea>
+                </div>
+
+                <!-- Payment methods -->
+                <h2 class="payment-heading">Payment Method</h2>
+
+                <label class="payment-option">
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="Cash on Delivery"
+                        checked
+                    >
+
+                    <span>
+                        <strong>Cash on Delivery</strong>
+                        <small>Pay when your food arrives</small>
+                    </span>
+                </label>
+
+                <label class="payment-option">
+                    <input
+                        type="radio"
+                        name="payment"
+                        value="Online Payment"
+                    >
+
+                    <span>
+                        <strong>Online Payment</strong>
+                        <small>Card payment demo</small>
+                    </span>
+                </label>
+
+                <!-- Card details: demo UI only -->
+                <div id="cardPaymentSection" class="card-payment-section" hidden>
+                    <h3>Card Details</h3>
+
+                    <p class="card-demo-notice">
+                        Demo only. No real payment will be processed.
+                        Do not enter real payment card details.
+                    </p>
+
+                    <div class="form-group">
+                        <label for="cardholderName">Cardholder Name</label>
+
+                        <input
+                            type="text"
+                            id="cardholderName"
+                            placeholder="Name on card"
+                            autocomplete="off"
+                            maxlength="80"
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cardNumber">Demo Card Number</label>
+
+                        <input
+                            type="text"
+                            id="cardNumber"
+                            placeholder="4242 4242 4242 4242"
+                            inputmode="numeric"
+                            autocomplete="off"
+                            maxlength="23"
+                        >
+                    </div>
+
+                    <div class="card-fields-row">
+                        <div class="form-group">
+                            <label for="cardExpiry">Expiry Date</label>
+
+                            <input
+                                type="text"
+                                id="cardExpiry"
+                                placeholder="MM/YY"
+                                inputmode="numeric"
+                                autocomplete="off"
+                                maxlength="5"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cardCvv">Demo CVV</label>
+
+                            <input
+                                type="password"
+                                id="cardCvv"
+                                placeholder="123"
+                                inputmode="numeric"
+                                autocomplete="off"
+                                maxlength="4"
+                            >
+                        </div>
+                    </div>
+
+                    <p
+                        id="cardError"
+                        class="order-message error"
+                        aria-live="polite"
+                    ></p>
+                </div>
+
+                <button
+                    type="submit"
+                    id="placeOrderBtn"
+                    class="place-order-btn"
+                    disabled
+                >
+                    Check Location to Order
+                </button>
+
+                <p
+                    id="orderMessage"
+                    class="order-message"
+                    aria-live="polite"
+                ></p>
+            </form>
+        </section>
+
+        <!-- Order summary -->
+        <aside class="checkout-card order-summary">
+            <h2>Your Order</h2>
+
+            <div id="cartItems" class="cart-items"></div>
+
+            <div id="emptyCart" class="empty-cart" hidden>
+                <p>Your cart is empty.</p>
+                <a href="menu.html">Explore our menu →</a>
+            </div>
+
+            <div class="price-row">
+                <span>Subtotal</span>
+                <strong id="subtotal">Rs. 0.00</strong>
+            </div>
+
+            <div class="price-row">
+                <span>Delivery Fee</span>
+                <strong id="deliveryFee">Rs. 0.00</strong>
+            </div>
+
+            <div class="price-row total-row">
+                <span>Total</span>
+                <strong id="total">Rs. 0.00</strong>
+            </div>
+
+            <div class="delivery-note">
+                <span aria-hidden="true">🚚</span>
+
+                <p>
+                    Delivery eligibility is checked using your current
+                    location.
+                </p>
+            </div>
+        </aside>
+
+    </div>
+</main>
+
+
+
+<!-- Thank You popup -->
+<div id="successModal" class="success-modal" hidden>
+    <div
+        class="success-modal-content"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="successTitle"
+        aria-describedby="successMessage"
+    >
+        <div class="success-icon" aria-hidden="true">✓</div>
+
+        <h2 id="successTitle">Thank You!</h2>
+
+        <p id="successMessage">
+            Thank you for choosing RasaGo.
+        </p>
+
+        <div class="success-order-reference">
+            <span>Order Reference</span>
+            <strong id="successOrderReference"></strong>
+        </div>
+
+        <p id="successPaymentInfo" class="success-payment-info"></p>
+
+        <button
+            type="button"
+            id="closeSuccessModal"
+            class="success-close-btn"
+        >
+            Continue
+        </button>
+
+        <div class="order-success-actions">
+    <button type="button" id="trackMyOrderBtn" class="track-order-btn">
+        Track My Order
+    </button>
+
+    <button type="button" id="continueShoppingBtn" class="continue-shopping-btn">
+        Continue Shopping
+    </button>
+</div>
+    </div>
+</div>
+
+
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container footer-content">
+
+        <a href="index.html" class="footer-brand">
+            <img src="assets/images/Logo.png" alt="RasaGo">
+        </a>
+
+        <p>Bringing your favourite flavours closer to home.</p>
+
+        <div class="footer-links">
+            <a href="index.html">Home</a>
+            <a href="#categories">Categories</a>
+            <a href="menu.html">Menu</a>
+        </div>
+
+        <p class="copyright">© 2026 RasaGo. All rights reserved.</p>
+    </div>
+</footer>
+
+</body>
+</html>

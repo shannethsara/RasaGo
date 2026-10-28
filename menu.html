@@ -1,0 +1,245 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RasaGo | Full Menu</title>
+
+    <link rel="icon" href="assets/images/favicon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/home.css">
+
+    <script src="js/menu.js" defer></script>
+</head>
+<body>
+
+<header class="menu-header">
+    <a href="index.html" class="menu-logo">
+        <img src="assets/images/logo.png" alt="RasaGo Logo">
+    </a>
+
+    <nav class="menu-nav">
+        <a href="index.html">Home</a>
+        <a href="menu.html" class="active">Full Menu</a>
+        <a href="profile.html">My Profile</a>
+    </nav>
+
+    <button class="cart-button" id="openCart" type="button">
+        🛒 Cart <span id="cartCount">0</span>
+    </button>
+</header>
+
+<main class="menu-container">
+
+    <!-- HERO AND SEARCH -->
+    <section class="menu-hero">
+        <span class="menu-eyebrow">FRESH • TASTY • LOCAL</span>
+
+        <h1>Explore Our <span>Menu</span></h1>
+
+        <p>Choose your favourite Sri Lankan meals, customise your plate and enjoy!</p>
+
+        <div class="menu-search">
+            <span aria-hidden="true">⌕</span>
+
+            <input
+                type="search"
+                id="foodSearch"
+                placeholder="Search your favourite food..."
+                aria-label="Search food"
+                autocomplete="off"
+            >
+
+            <button id="clearSearch" type="button" aria-label="Clear search">&times;</button>
+        </div>
+    </section>
+
+    <!-- CATEGORIES -->
+    <section class="categories-section">
+        <span class="menu-eyebrow">CHOOSE YOUR FAVOURITE</span>
+        <h2>Food Categories</h2>
+
+        <div class="category-grid" id="categoryGrid">
+
+            <button class="category-card active" data-category="all" type="button">
+                <span class="category-emoji">🍽️</span>
+                <strong>All Foods</strong>
+                <small>Explore everything</small>
+            </button>
+
+            <button class="category-card" data-category="rice" type="button">
+                <span class="category-emoji">🍛</span>
+                <strong>Rice &amp; Curry</strong>
+                <small>Build your own plate</small>
+            </button>
+
+            <button class="category-card" data-category="string-hoppers" type="button">
+                <span class="category-emoji">🍜</span>
+                <strong>String Hoppers</strong>
+                <small>Soft &amp; traditional</small>
+            </button>
+
+            <button class="category-card" data-category="hoppers" type="button">
+                <span class="category-emoji">🥞</span>
+                <strong>Hoppers</strong>
+                <small>Crispy &amp; delicious</small>
+            </button>
+
+            <button class="category-card" data-category="rotti" type="button">
+                <span class="category-emoji">🫓</span>
+                <strong>Rotti</strong>
+                <small>Freshly prepared</small>
+            </button>
+
+            <button class="category-card" data-category="kottu" type="button">
+                <span class="category-emoji">🍳</span>
+                <strong>Kottu</strong>
+                <small>Hot &amp; flavourful</small>
+            </button>
+
+            <button class="category-card" data-category="noodles" type="button">
+                <span class="category-emoji">🍜</span>
+                <strong>Noodles</strong>
+                <small>Quick &amp; tasty</small>
+            </button>
+
+            <button class="category-card" data-category="pasta" type="button">
+                <span class="category-emoji">🍝</span>
+                <strong>Pasta</strong>
+                <small>Rich &amp; creamy</small>
+            </button>
+
+        </div>
+    </section>
+
+    <!-- FOOD RESULTS -->
+    <section class="food-section" id="foodMenu">
+        <div class="food-heading">
+            <div>
+                <span class="menu-eyebrow">MADE WITH LOVE</span>
+                <h2 id="foodHeading">All Foods</h2>
+                <p id="foodSubheading">Find something delicious for today.</p>
+            </div>
+
+            <span id="foodResultCount">0 items</span>
+        </div>
+
+        <div class="food-grid" id="foodGrid"></div>
+
+        <div class="no-foods" id="noFoods" hidden>
+            <h3>No food found</h3>
+            <p>Try another food name or category.</p>
+            <button id="resetSearch" type="button">Show All Foods</button>
+        </div>
+    </section>
+
+</main>
+
+<!-- CUSTOMIZE POPUP -->
+<div class="menu-overlay" id="customizeModal" hidden>
+    <div class="customize-modal" role="dialog" aria-modal="true" aria-labelledby="customizeTitle">
+        <button class="modal-close modal-top-close" id="closeCustomize" type="button">&times;</button>
+
+        <span class="menu-eyebrow">MAKE IT YOUR WAY</span>
+        <h2 id="customizeTitle">Customise Your Meal</h2>
+        <p id="customizeDescription"></p>
+
+        <div id="riceOptions" hidden>
+            <div class="custom-section">
+                <h3>Choose Your Rice</h3>
+                <div class="choice-grid" id="riceChoices"></div>
+            </div>
+
+            <div class="custom-section">
+                <h3>Choose Your Curries</h3>
+                <div class="curry-list" id="curryChoices"></div>
+            </div>
+        </div>
+
+        <div id="standardOptions" hidden>
+            <div class="custom-section">
+                <h3 id="portionHeading">Choose Quantity</h3>
+
+                <div class="quantity-control">
+                    <button id="decreaseQty" type="button">−</button>
+                    <span id="customQty">1</span>
+                    <button id="increaseQty" type="button">+</button>
+                </div>
+            </div>
+
+            <div class="custom-section">
+                <h3>Extras</h3>
+                <div class="curry-list" id="extraChoices"></div>
+            </div>
+        </div>
+
+        <p class="form-message" id="customMessage" aria-live="polite"></p>
+
+        <div class="custom-footer">
+            <div class="custom-price">
+                <small>Total Price</small>
+                <strong id="customTotal">LKR 0</strong>
+            </div>
+
+            <div class="custom-actions">
+                <button class="add-cart-btn" id="confirmAddCart" type="button">Add to Cart</button>
+                <button class="order-now-btn" id="orderNowBtn" type="button">Order Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- CART POPUP -->
+<div class="menu-overlay cart-overlay" id="cartModal" hidden>
+    <aside class="cart-drawer" role="dialog" aria-modal="true" aria-labelledby="cartTitle">
+        <div class="cart-heading">
+            <h2 id="cartTitle">Your Cart</h2>
+            <button class="modal-close" id="closeCart" type="button">&times;</button>
+        </div>
+
+        <div id="cartItems"></div>
+
+        <div class="empty-cart" id="emptyCart">
+            <h3>Your cart is empty</h3>
+            <p>Add your favourite food to get started.</p>
+        </div>
+
+        <div class="cart-footer" id="cartFooter" hidden>
+            <div class="cart-total-row">
+                <span>Total</span>
+                <strong id="cartTotal">LKR 0</strong>
+            </div>
+            <button class="add-cart-btn checkout-button" id="checkoutButton" type="button">
+                Continue to Checkout
+            </button>
+        </div>
+    </aside>
+</div>
+
+<!-- Footer -->
+    <footer class="footer">
+        <div class="container footer-content">
+
+            <a href="index.html" class="footer-brand">
+                <img src="assets/images/Logo.png" alt="RasaGo">
+            </a>
+
+            <p>Bringing your favourite flavours closer to home.</p>
+
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="#categories">Categories</a>
+                <a href="#popular">Menu</a>
+            </div>
+
+            <p class="copyright">
+                © 2026 RasaGo. All rights reserved.
+            </p>
+
+        </div>
+    </footer>
+
+</body>
+</html>

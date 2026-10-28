@@ -1,0 +1,224 @@
+/* RasaGo brand colors */
+
+:root {
+    --orange: #FF8A00;
+    --red: #F04424;
+    --green: #167B32;
+    --cream: #FFF7E6;
+    --dark: #28251F;
+    --muted: #777168;
+    --white: #FFFFFF;
+    --border: #F0E7D9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 100px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--dark);
+    background: var(--white);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+.container {
+    width: min(1160px, calc(100% - 40px));
+    margin: 0 auto;
+}
+
+/* Navbar */
+
+.navbar {
+    height: 84px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--border);
+}
+
+.navbar-content {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.brand {
+    width: 145px;
+    height: 76px;
+    flex-shrink: 0;
+}
+
+.brand img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: #625D54;
+    font-size: 13px;
+    font-weight: 700;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--orange);
+}
+
+.profile-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: 10px;
+    background: linear-gradient(110deg, var(--orange), var(--red));
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.profile-icon {
+    font-size: 18px;
+}
+
+.menu-toggle {
+    display: none;
+    border: 0;
+    background: var(--cream);
+    border-radius: 8px;
+    padding: 8px 11px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Shared sections */
+
+.section-label {
+    color: var(--green);
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.7px;
+}
+
+.section-heading {
+    margin-bottom: 28px;
+}
+
+.section-heading h2,
+.center-heading h2 {
+    font-size: clamp(26px, 3vw, 35px);
+    margin-top: 9px;
+}
+
+.section-heading p,
+.center-heading p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-top: 8px;
+}
+
+.section-heading-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 20px;
+}
+
+@media (max-width: 850px) {
+    .navbar-content {
+        gap: 15px;
+    }
+
+    .brand {
+        width: 115px;
+    }
+
+    .nav-links {
+        gap: 16px;
+    }
+
+    .nav-links a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        height: 74px;
+    }
+
+    .navbar-content {
+        gap: 10px;
+    }
+
+    .brand {
+        width: 90px;
+        height: 65px;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 73px;
+        left: 0;
+        right: 0;
+        padding: 20px;
+        background: white;
+        border-bottom: 1px solid var(--border);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+    }
+
+    .nav-links.is-open {
+        display: flex;
+    }
+
+    .profile-btn {
+        padding: 10px 9px;
+        font-size: 10px;
+        gap: 5px;
+    }
+
+    .profile-icon {
+        font-size: 15px;
+    }
+
+    .section-heading-row {
+        align-items: flex-start;
+    }
+}
